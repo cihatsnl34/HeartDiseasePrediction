@@ -84,12 +84,39 @@ cm=confusion_matrix(y_test,y_pred)
 print(cm)
 #0.84 başarı
 from sklearn.neighbors import KNeighborsClassifier
-knn=KNeighborsClassifier(n_neighbors=11,metric='minkowski')
+knn=KNeighborsClassifier(n_neighbors=9,metric='minkowski')
 #n_neighbors :komşu sayısını veririz yazmazsak eğer default olarak 5 alır 
 #metric: komşu ile kendi arasında ki mesafeyi ölçecek metriği belirtiriz ona göre ölçer.
 #sklearn.neigbors dökümantasyonunda detayları var
 knn.fit(X_train,y_train)
 y_pred=knn.predict(X_test)
 cm=confusion_matrix(y_test, y_pred)    
+print("KNN")
 print(cm)     
 #0,848
+from sklearn.naive_bayes import GaussianNB
+gnb = GaussianNB()
+gnb.fit(X_train, y_train)
+
+y_pred = gnb.predict(X_test)
+
+cm = confusion_matrix(y_test,y_pred)
+print('GNB')
+print(cm)
+from sklearn.tree import DecisionTreeClassifier
+dtc = DecisionTreeClassifier(criterion = 'gini')
+
+dtc.fit(X_train,y_train)
+y_pred = dtc.predict(X_test)
+
+cm = confusion_matrix(y_test,y_pred)
+print('DTC')
+print(cm)
+from sklearn.ensemble import RandomForestClassifier
+rfc = RandomForestClassifier(n_estimators=15, criterion = 'gini')
+rfc.fit(X_train,y_train)
+
+y_pred = rfc.predict(X_test)
+cm = confusion_matrix(y_test,y_pred)
+print('RFC')
+print(cm)
